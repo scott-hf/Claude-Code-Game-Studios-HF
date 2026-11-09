@@ -169,6 +169,14 @@ else
 fi
 [ -f "$HERE/yaml-get.awk" ] || { echo "test-run: $HERE/yaml-get.awk is missing" >&2; exit 1; }
 yget() { [ -f project.yaml ] && YG_PATH="$1" awk -f "$HERE/yaml-get.awk" project.yaml; }
+# lget KEY — the key from project.local.yaml (this machine), else project.yaml. The unreal.*
+# machine paths live in the first.
+lget() {
+  _lv=""
+  [ -f project.local.yaml ] && _lv=$(YG_PATH="$1" awk -f "$HERE/yaml-get.awk" project.local.yaml)
+  [ -n "$_lv" ] || _lv=$(yget "$1")
+  printf '%s' "$_lv"
+}
 
 printf 'engine\t%s\n' "$ENAME"
 
@@ -198,6 +206,7 @@ else
   fi
   if [ "$ENGINE" != unreal ] && exe_ok "$first"; then EXE="$first"; EXE_SRC="commands.test"
   elif [ -n "$ENGINE_PATH" ] && { [ "$ENGINE" = unreal ] && [ -d "$ENGINE_PATH" ] || { [ "$ENGINE" != unreal ] && exe_ok "$ENGINE_PATH"; }; }; then EXE="$ENGINE_PATH"; EXE_SRC="engine.path"
+  elif [ "$ENGINE" = unreal ] && [ -d "$(lget unreal.engine_root)" ]; then EXE=$(lget unreal.engine_root); EXE_SRC="unreal.engine_root"
   elif [ "$ENGINE" = godot ] && exe_ok godot; then EXE="godot"; EXE_SRC="path"
   elif [ "$ENGINE" = unity ] && exe_ok Unity; then EXE="Unity"; EXE_SRC="path"
   elif [ "$ENGINE" = web ] && exe_ok npm; then EXE="npm"; EXE_SRC="path"
@@ -294,6 +303,22 @@ case "$ENGINE" in
         BUILD="\"$EXE/Engine/Build/BatchFiles/Mac/Build.sh\" ${PROJ}Editor Mac Development -Project=\"$ABS/$PROJ.uproject\" 2>&1"
         CMD="" ;;
     esac
+    # The engine table's build and test cells, when project.local.yaml names this machine's
+    # paths (unreal.project_root, unreal.engine_root, unreal.hf_automation_root): each
+    # @unreal.<key>@ in a cell is replaced by that key's value. A cell still holding an
+    # unresolved @unreal.*@ is not used, and the commands above stay.
+    UE_TSV="$HERE/../engines/engines.tsv"
+    # The cells are the Windows (Win64) commands; Linux and macOS keep the commands above.
+    if [ "$OSN" = windows ] && [ -f "$HERE/engine-row.awk" ] && [ -f "$UE_TSV" ] && [ -n "$(lget unreal.project_root)" ]; then
+      for _col in build test; do
+        _cell=$(awk -F'\t' -v engine=unreal -v col=$_col -f "$HERE/engine-row.awk" "$UE_TSV")
+        for _k in project_root engine_root hf_automation_root; do
+          _cell=${_cell//@unreal.$_k@/$(lget unreal.$_k)}
+        done
+        case "$_cell" in ""|*'@unreal.'*) continue ;; esac
+        if [ "$_col" = build ]; then BUILD="$_cell 2>&1"; else CMD="$_cell 2>&1"; CMD_SRC="engines.tsv"; fi
+      done
+    fi
     ;;
 esac
 # commands.test and --cmd win over the default. Unreal keeps the build first.

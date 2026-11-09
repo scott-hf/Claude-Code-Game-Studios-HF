@@ -71,17 +71,17 @@ the session's model. Whether the tier takes effect depends on how the skill star
 (see the table at the top of this file).
 
 **Agent model tiers.** 30 agents use `model: inherit` and run on the session's
-model. 19 are pinned:
+model. 20 are pinned (count them with `grep -l '^model: ' .claude/agents/*.md`):
 
 - **opus (3):** `creative-director`, `producer`, `technical-director`. Under an
   Opus session an `opus` pin runs on the session's exact model, `[1m]` included,
   so it never gets a smaller window than its parent.
-- **sonnet (16):** `lead-programmer`, `prototyper`, `devops-engineer`,
-  `community-manager` and the 12 engine sub-specialists:
+- **sonnet (17):** `lead-programmer`, `prototyper`, `devops-engineer`,
+  `community-manager` and the 13 engine sub-specialists:
   `godot-csharp-specialist`, `godot-gdextension-specialist`,
   `godot-gdscript-specialist`, `godot-shader-specialist`,
-  `ue-blueprint-specialist`, `ue-gas-specialist`, `ue-replication-specialist`,
-  `ue-umg-specialist`, `unity-addressables-specialist`,
+  `ue-angelscript-specialist`, `ue-blueprint-specialist`, `ue-gas-specialist`,
+  `ue-replication-specialist`, `ue-umg-specialist`, `unity-addressables-specialist`,
   `unity-dots-specialist`, `unity-shader-specialist`, `unity-ui-specialist`.
   `/dev-story` and `/code-review` spawn the sub-specialists named in
   `project.yaml`'s `specialists` block (which `/setup-engine` writes); `/team-ui` spawns

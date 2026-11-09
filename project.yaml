@@ -25,3 +25,25 @@ framework:
 # here. `/project-settings --local <key>=<value>` writes there; `/project-settings <key>=<value>`
 # edits this file. See `.claude/docs/config-resolution.md` for the full
 # precedence order.
+
+# The profile this checkout runs: .claude/profiles/unreal.sparse hides the Godot, Unity
+# and Web scaffolding by sparse checkout (bash .claude/scripts/profile-apply.sh unreal;
+# --restore undoes it, --status lists it). Nothing is deleted, so upstream merges stay clean.
+profile: unreal
+
+# Unreal with C++ and AngelScript (the Hazelight fork). Machine paths (unreal.project_root,
+# unreal.engine_root, unreal.hf_automation_root) belong in project.local.yaml, which is
+# gitignored: see .claude/docs/config-resolution.md, "Machine paths: unreal.*".
+engine:
+  name: "Unreal"
+  version: "5.8"
+  language: "C++"
+  languages: ["C++", "AngelScript"]
+  rendering: "Lumen + Nanite (deferred)"
+  physics: "Chaos"
+
+specialists:
+  code: "unreal-specialist"
+  shader: "unreal-specialist"
+  ui: "ue-umg-specialist"
+  additional: ["ue-angelscript-specialist", "ue-gas-specialist", "ue-blueprint-specialist", "ue-replication-specialist"]

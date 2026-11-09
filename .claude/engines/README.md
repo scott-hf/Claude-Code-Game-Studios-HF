@@ -21,6 +21,26 @@ paths, so a change to `test_root` here must also be made there.
 cell; no cell is left blank. Read it with `awk -F'\t'`: a bash `IFS` read merges
 empty fields.
 
+**Unreal tokens.** The Unreal row's `run`, `build`, `test` and `smoke` cells hold
+`@unreal.project_root@`, `@unreal.engine_root@` and `@unreal.hf_automation_root@`: the
+keys of `project.local.yaml` (`.claude/docs/config-resolution.md`, "Machine paths:
+`unreal.*`"). `test-run.sh unreal` replaces them for `build` and `test` on Windows and
+skips a cell whose key is unset; the cells are Win64 commands.
+
+## Profiles
+
+`.claude/profiles/<name>.sparse` lists the paths a profile hides. `project.yaml`'s
+`profile:` names the one in use. `bash .claude/scripts/profile-apply.sh <name>` hides them
+by `git sparse-checkout --no-cone`, `--restore` brings them back, `--status` counts them.
+The files stay in git: `git merge` of an upstream release that touches a hidden path
+works and `git status` stays clean. The `unreal` profile hides the Godot and Unity agents,
+`engines/web/`, `docs/engine-reference/{godot,unity,web}`, the matching `studio-tests`
+and the scripts and docs that only those engines use. A script that an active skill
+still calls stays visible even if it serves the web only: `one-shot-*.sh`, `page-shot.sh`,
+`vendor-three.sh`, `web-scaffold.sh`. The prototype skill's browser sketch (which
+needs `engines/web/` and the `one-shot-lean` template) therefore does not run while the
+profile is applied; `--restore` before using it.
+
 ## `web/`
 
 The files a new web project starts from. `scaffold/` holds every file

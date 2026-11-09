@@ -675,7 +675,10 @@ allowed = set(l.strip() for l in allowed_table.splitlines() if l.strip())
 # was written against a hand-made fixture and only run against the real file
 # afterwards, where it immediately flagged a correct file.
 EXEMPT_EXACT = {'schema_version'}
-EXEMPT_PREFIX = ('framework.',)
+# `unreal.*` are this machine's paths (project_root, engine_root, hf_automation_root) for
+# the Unreal engine-table commands; they exist only locally, so "move this to project.yaml"
+# would be wrong advice for them (config-resolution.md, "Machine paths: unreal.*").
+EXEMPT_PREFIX = ('framework.', 'unreal.')
 
 # The text of a block scalar is text, never keys (see get_yaml_key).
 def block_indent(stripped, indent):

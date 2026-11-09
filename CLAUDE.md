@@ -1,18 +1,20 @@
 # Claude Code Game Studios -- Game Studio Agent Architecture
 
-Indie game development managed through 49 coordinated Claude Code subagents.
+Indie game development managed through coordinated Claude Code subagents (the count:
+`bash .claude/scripts/agent-check.sh | sed -n 2p`; the Unreal profile hides the Godot and Unity ones).
 Each agent owns a specific domain, enforcing separation of concerns and quality.
 
 ## Technology Stack
 
-- **Engine**: [CHOOSE: Web / Godot 4 / Unity / Unreal Engine 5]
-- **Language**: [CHOOSE: TypeScript / GDScript / C# / C++ / Blueprint]
+- **Engine**: Unreal Engine 5.8 (Hazelight AngelScript fork; profile `unreal`, see `project.yaml`)
+- **Language**: C++ and AngelScript (AngelScript is the primary gameplay language; Blueprint as a production tool)
 - **Version Control**: Git with trunk-based development
-- **Build System**: [SPECIFY after choosing engine]
-- **Asset Pipeline**: [SPECIFY after choosing engine]
+- **Build System**: Unreal Build Tool; commands in `.claude/engines/engines.tsv` (Unreal row), machine paths in `project.local.yaml` (`unreal.*`)
+- **Asset Pipeline**: Unreal Editor; assets change through the editor, never by text tools
 
-> **Note**: Engine-specialist agents exist for Godot, Unity, and Unreal with
-> dedicated sub-specialists. Use the set matching your engine.
+> **Note**: The `unreal` profile (`bash .claude/scripts/profile-apply.sh --status`) hides the
+> Godot, Unity and Web scaffolding by sparse checkout; `--restore` brings it back. Use
+> `unreal-specialist` with its sub-specialists, including `ue-angelscript-specialist`.
 
 ## Project Structure
 
@@ -25,6 +27,8 @@ Each agent owns a specific domain, enforcing separation of concerns and quality.
      step and /project-settings (engine.name) write
      @docs/engine-reference/<engine>/VERSION.md here for the chosen engine. Skills
      that need the pinned version read that file on demand either way. -->
+
+@docs/engine-reference/unreal/VERSION.md
 
 
 ## Technical Preferences

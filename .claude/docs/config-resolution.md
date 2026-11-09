@@ -159,6 +159,27 @@ default rather than propagating a nonsense mode into every skill.
 > file metadata rather than preferences, and a `project.local.yaml` carrying
 > `schema_version: 1` is correct as written.
 
+## Machine paths: `unreal.*`
+
+An Unreal project needs three paths that differ per machine and so never go in
+`project.yaml`. Put them in `project.local.yaml` (gitignored); `validate_local_scope`
+exempts `unreal.*` like `framework.*`. `test-run.sh unreal` reads them to fill the
+`@unreal.<key>@` tokens in the Unreal row of `.claude/engines/engines.tsv`.
+
+Template (copy into `project.local.yaml`, replace the values):
+
+```yaml
+unreal:
+  project_root: "E:/path/to/MyProject"            # the folder holding the .uproject
+  engine_root: "E:/path/to/UnrealEngine"          # holds Engine/Binaries
+  hf_automation_root: "E:/path/to/claude-plugin-hf-automation"   # tools/wi-helpers/*.py
+```
+
+`project_root` and `engine_root` are enough for `build`, `run` and `smoke`; `test` also
+needs `hf_automation_root` (it runs `ue_driver.py test --live --tier base` against the
+running editor). A cell whose token has no value is skipped, and `test-run.sh` keeps
+its built-in Unreal commands.
+
 ## Defaults
 
 | Knob | Default |

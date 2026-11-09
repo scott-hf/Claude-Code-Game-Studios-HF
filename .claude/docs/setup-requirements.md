@@ -58,6 +58,17 @@ sudo pacman -S jq       # Arch
   hook of your own needs the same form: a plain `bash "..."` command blocks
   every tool call on a machine without Git Bash
 
+### Perforce workspaces (an Unreal project tree)
+- This repo is the framework, kept in git. An Unreal project is often a Perforce
+  workspace, where `validate-commit.sh` and `validate-push.sh` (git hooks that run
+  on `git commit` and `git push`) never fire: no git command runs there, so those
+  two checks are inert. If you want those rules there, put them in the team's
+  Perforce triggers or CI.
+- On the `unreal` profile, a skill never runs a git command that changes an Unreal
+  project tree (no `git add`, `commit`, `reset`, `checkout`, `stash`). A skill that
+  writes into the project writes files and stops; staging and submitting stay with
+  the person. Read-only git (`status`, `diff`, `log`) is fine.
+
 ### macOS / Linux
 - Bash is available natively
 - Install `jq` via your package manager for full hook support

@@ -1,0 +1,41 @@
+# unreal.sparse - the Unreal profile: engine scaffolding that is wholly Godot, Unity or Web.
+#
+# Read by .claude/scripts/profile-apply.sh, which hands the non-comment lines to
+# `git sparse-checkout set --no-cone`. Nothing is deleted or moved: the paths stay in
+# git, so `git merge` of upstream (UPGRADING.md) works, and `--restore` brings them back.
+# `/*` includes everything; each `!` line then hides one path (gitignore syntax, anchored
+# with a leading `/`). A `# group: <name> - <reason>` line names the rows under it.
+#
+# Rule for a script: it is listed only after `grep -rE <name>` over the active tree found
+# no caller that is neither hidden here nor guarded to another engine. The scripts that
+# fail that test stay and are reported by the profile's change record, not hidden.
+/*
+
+# group: godot-agents - the five Godot specialists; shared skills keep their Godot branches
+!/.claude/agents/godot-*.md
+
+# group: unity-agents - the five Unity specialists
+!/.claude/agents/unity-*.md
+
+# group: web-engine - the web starters and scaffold /setup-engine web copies
+!/.claude/engines/web/
+
+# group: web-scripts - callers are all hidden here or guarded to the Web engine
+!/.claude/scripts/itch-zip.sh
+!/.claude/scripts/web-detect.sh
+
+# group: godot-scripts - called only from the Godot branch of /dev-story
+!/.claude/scripts/godot-parse-check.gd
+
+# group: engine-reference - pinned reference docs for the other engines
+!/docs/engine-reference/godot/
+!/docs/engine-reference/unity/
+!/docs/engine-reference/web/
+
+# group: studio-tests - behavioral specs of the hidden agents
+!/studio-tests/agents/engine/godot/
+!/studio-tests/agents/engine/unity/
+
+# group: web-docs - the itch/web share page and the one-shot starter template
+!/.claude/docs/share-link.md
+!/.claude/docs/templates/one-shot-lean/

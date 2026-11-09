@@ -2515,6 +2515,16 @@ platform:
   touch_support: "None"      # Full | Partial | None
   cert_tier: none            # none | itch | steam | console
 
+profile: unreal              # optional: the profile .claude/scripts/profile-apply.sh applied
+                             # (.claude/profiles/<name>.sparse); absent = no profile
+
+unreal:                      # machine paths for the Unreal engine-table commands; set in
+                             # project.local.yaml (gitignored), never here. See
+                             # config-resolution.md, "Machine paths: unreal.*"
+  project_root: "E:/p4/prjefz/PrjEfz"        # the folder holding the .uproject
+  engine_root: "E:/ue/UnrealEngine-Angelscript-Scott"
+  hf_automation_root: "E:/git/claude-plugin-hf-automation"
+
 engine:
   name: "Godot"              # Godot | Unity | Unreal | Web — set by /setup-engine
   version: "4.7"

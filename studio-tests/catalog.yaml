@@ -1109,6 +1109,14 @@ agents:
     last_category_result: ""
     category: engine
 
+  - name: ue-angelscript-specialist
+    spec: studio-tests/agents/engine/unreal/ue-angelscript-specialist.md
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    category: engine
+
   - name: ue-blueprint-specialist
     spec: studio-tests/agents/engine/unreal/ue-blueprint-specialist.md
     last_spec: ""

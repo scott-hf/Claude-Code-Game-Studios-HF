@@ -1,5 +1,5 @@
 engine	code_root	test_root	asset_root	run	build	test	smoke
 Godot	src	tests	assets	godot --path . --windowed --resolution 1280x720	-	godot --headless -s -d --remote-debug tcp://127.0.0.1:0 res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a res://tests --ignoreHeadlessMode	godot --headless --quit-after 5
 Unity	Assets	Assets/Tests	Assets	-	-	-	-
-Unreal	Source	Source/<Module>/Private/Tests	Content	-	-	-	-
+Unreal	Source	Source/<Module>/Private/Tests	Content	"@unreal.engine_root@/Engine/Binaries/Win64/UnrealEditor.exe" "$(ls "@unreal.project_root@"/*.uproject | head -1)" -game -windowed -ResX=1280 -ResY=720	P=$(ls "@unreal.project_root@"/*.uproject | head -1); "@unreal.engine_root@/Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.exe" "$(basename "$P" .uproject)Editor" Win64 Development "-Project=$P" -WaitMutex	cd "@unreal.project_root@" && python -I "@unreal.hf_automation_root@/tools/wi-helpers/ue_driver.py" test --live --tier base	"@unreal.engine_root@/Engine/Binaries/Win64/UnrealEditor-Cmd.exe" "$(ls "@unreal.project_root@"/*.uproject | head -1)" -game -nullrhi -unattended -stdout -ExecCmds="Quit"
 Web	src	tests	assets	npm run dev	npm run build	npm test	npm run smoke

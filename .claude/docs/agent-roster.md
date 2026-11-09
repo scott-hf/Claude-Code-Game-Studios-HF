@@ -69,6 +69,7 @@ session's model.
 
 | Agent | Subsystem | When to Use |
 | ---- | ---- | ---- |
+| `ue-angelscript-specialist` | AngelScript (Hazelight fork) | Script versus C++ split, script gameplay code, hot reload, AS unit tests; fork facts are NOT SOURCEABLE here (see `docs/engine-reference/unreal/hazelight-angelscript.md`) |
 | `ue-gas-specialist` | Gameplay Ability System | Abilities, gameplay effects, attribute sets, tags, prediction |
 | `ue-blueprint-specialist` | Blueprint Architecture | BP/C++ boundary, graph standards, naming, BP optimization |
 | `ue-replication-specialist` | Networking/Replication | Property replication, RPCs, prediction, relevancy, bandwidth |
