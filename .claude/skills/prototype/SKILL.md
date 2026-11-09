@@ -44,6 +44,8 @@ no `project.yaml` engine, read the engine line in `CLAUDE.md` the same way.
 | `--path html`, no engine, or `engine.name: Web` | The one-shot: One-shot 1 to 3 |
 | An engine named | Phases 1-9; Phase 3 offers the browser sketch as one option, not recommended. Chosen, it goes on at One-shot 1 with Phase 1's question |
 
+Unreal profile (`profile: unreal` in `project.yaml`): to explore a loop with seeded PIE scenarios instead of a throwaway prototype, use `/gameflow <loop>` then `/scenario-run <manifest>`.
+
 **No engine set when the skill starts: the browser game comes first,** built and handed over
 whatever is asked at the card. A wish for an engine (one installed, netcode to prove, the engine
 to ship on) is one card line, as the card file says, and `/setup-engine` is the handover's next

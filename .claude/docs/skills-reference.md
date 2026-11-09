@@ -1,6 +1,6 @@
 # Available Skills (Slash Commands)
 
-75 slash commands organized by phase. Type `/` in Claude Code to access any of them.
+Slash commands organized by phase (count them with `ls .claude/skills`). Type `/` in Claude Code to access any of them.
 
 > **Renamed in 1.3.0:** `/help` is now `/next-step`, `/settings` is now
 > `/project-settings` and `/changelog` is now `/write-changelog`, because other
@@ -88,6 +88,8 @@
 | `/qa-plan` | Generate a QA test plan for a sprint or feature |
 | `/smoke-check` | Run critical path smoke test gate before QA hand-off |
 | `/soak-test` | Generate a soak test protocol for extended play sessions |
+| `/gameflow` | Map one game loop with testable hypotheses and write a scenario manifest per hypothesis (Unreal profile: seeded PIE scenarios) |
+| `/scenario-run` | Run a gameflow manifest as one seeded PIE scenario with a StateTree player surrogate; verdict per predicate, trace, fail screenshot (Unreal profile) |
 | `/regression-suite` | Map test coverage to GDD critical paths, identify fixed bugs without regression tests |
 | `/test-setup` | Scaffold the test framework and CI/CD pipeline for the project's engine |
 | `/test-helpers` | Generate engine-specific test helper libraries for the test suite |

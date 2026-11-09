@@ -296,6 +296,24 @@ phases:
               pattern: '^# Concept Prototype Report:'
         description: "Build a throwaway prototype to validate the core mechanic is fun before committing to full production. Recommended for first-time mechanics or high-risk design decisions. Solo devs with proven concepts may skip."
 
+      - id: gameflow
+        name: "Gameflow loop map"
+        command: /gameflow
+        required: false
+        artifact:
+          glob: "design/gameflow/*.md"
+          min_count: 1
+        description: "Unreal profile: map a core loop (goals, actions, feedback, resources, progression, failure, recovery) with testable hypotheses, each tied to a scenario manifest. Optional; needs unreal.project_root in project.local.yaml for the manifests to land in the project."
+
+      - id: scenario-run
+        name: "Run gameflow scenarios"
+        command: /scenario-run
+        required: false
+        repeatable: true
+        artifact:
+          note: "No tracked artifact: the report, result.json and trace.jsonl are regenerable run output under the project's Saved/HF/Scenario/. Read the verdict printed by /scenario-run (PASS, FAIL or NOT ASSESSED)."
+        description: "Unreal profile: play one /gameflow manifest as a short seeded PIE scenario with a StateTree player surrogate. Optional; single-process PIE only."
+
       - id: create-epics
         name: "Create Epics"
         command: /create-epics

@@ -73,6 +73,7 @@ session's model.
 | `ue-gas-specialist` | Gameplay Ability System | Abilities, gameplay effects, attribute sets, tags, prediction |
 | `ue-blueprint-specialist` | Blueprint Architecture | BP/C++ boundary, graph standards, naming, BP optimization |
 | `ue-replication-specialist` | Networking/Replication | Property replication, RPCs, prediction, relevancy, bandwidth |
+| `ue-scenario-automation` | Gameflow scenarios (on demand) | Manifests, scenario modules, StateTree surrogate trees as `hf.statetree/1` JSON, save restore points, scenario setup logic. Spawned only by `/scenario-run` and `/gameflow`; not a default team member (`project.yaml` `specialists.on_demand`) |
 | `ue-umg-specialist` | UMG/CommonUI | Widget hierarchy, data binding, CommonUI input, UI performance |
 
 ### Unity Sub-Specialists

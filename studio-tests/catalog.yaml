@@ -742,6 +742,28 @@ skills:
     priority: low
     category: utility
 
+  - name: gameflow
+    spec: studio-tests/skills/utility/gameflow.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
+  - name: scenario-run
+    spec: studio-tests/skills/utility/scenario-run.md
+    last_static: ""
+    last_static_result: ""
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    priority: low
+    category: utility
+
   - name: test-setup
     spec: studio-tests/skills/utility/test-setup.md
     last_static: ""
@@ -1111,6 +1133,14 @@ agents:
 
   - name: ue-angelscript-specialist
     spec: studio-tests/agents/engine/unreal/ue-angelscript-specialist.md
+    last_spec: ""
+    last_spec_result: ""
+    last_category: ""
+    last_category_result: ""
+    category: engine
+
+  - name: ue-scenario-automation
+    spec: studio-tests/agents/engine/unreal/ue-scenario-automation.md
     last_spec: ""
     last_spec_result: ""
     last_category: ""

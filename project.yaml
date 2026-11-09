@@ -47,3 +47,6 @@ specialists:
   shader: "unreal-specialist"
   ui: "ue-umg-specialist"
   additional: ["ue-angelscript-specialist", "ue-gas-specialist", "ue-blueprint-specialist", "ue-replication-specialist"]
+  # On-demand: spawned only by /scenario-run and /gameflow, never part of the default team, so
+  # it is deliberately NOT in `additional`. Documentation key; no helper reads it.
+  on_demand: ["ue-scenario-automation"]
